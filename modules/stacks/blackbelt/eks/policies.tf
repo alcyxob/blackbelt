@@ -1,8 +1,8 @@
 resource "aws_iam_policy" "InlineEKSClusterNodesPolicyToAccessKMS" {
 
-  name        = "InlineEKS-${var.cluster_name}-${var.region}ClusterNodesPolicyToAccessKMS"
+  name        = "InlineEKS-${var.eks_cluster_name}-${var.region}ClusterNodesPolicyToAccessKMS"
   path        = "/"
-  description = "The inline policy for the nodes in the EKS cluster ${var.cluster_name} of the region ${var.region}."
+  description = "The inline policy for the nodes in the EKS cluster ${var.eks_cluster_name} of the region ${var.region}."
 
   policy = <<POLICY
 ${jsonencode(
@@ -27,9 +27,9 @@ POLICY
 
 resource "aws_iam_policy" "ALBControllerPolicyToAccessEC2" {
 
-  name        = "InlineEKS-${var.cluster_name}-${var.region}ALBControllerPolicyToAccessEC2"
+  name        = "InlineEKS-${var.eks_cluster_name}-${var.region}ALBControllerPolicyToAccessEC2"
   path        = "/"
-  description = "The inline policy to access ec2 services from ALB Controller on cluster ${var.cluster_name} of the region ${var.region}."
+  description = "The inline policy to access ec2 services from ALB Controller on cluster ${var.eks_cluster_name} of the region ${var.region}."
 
   policy = <<POLICY
 ${jsonencode(
@@ -53,9 +53,9 @@ POLICY
 
 resource "aws_iam_policy" "AWSLoadBalancerControllerIAMPolicy" {
 
-  name        = "InlineEKS-${var.cluster_name}-${var.region}AWSLoadBalancerControllerIAMPolicy"
+  name        = "InlineEKS-${var.eks_cluster_name}-${var.region}AWSLoadBalancerControllerIAMPolicy"
   path        = "/"
-  description = "The inline policy to access ALB services from ALB Controller on cluster ${var.cluster_name} of the region ${var.region}."
+  description = "The inline policy to access ALB services from ALB Controller on cluster ${var.eks_cluster_name} of the region ${var.region}."
 
   policy = <<POLICY
 ${jsonencode(

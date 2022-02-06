@@ -1,6 +1,6 @@
 // EKS
 resource "aws_iam_role" "eks_cluster_role" {
-  name = "eks-cluster-${var.cluster_name}"
+  name = "eks-cluster-${var.eks_cluster_name}"
 
   assume_role_policy = <<POLICY
 {
@@ -36,7 +36,7 @@ resource "aws_iam_role_policy_attachment" "eks_cluster_ClusterKMSAccessAttachmen
 }
 
 resource "aws_iam_role" "eks_managed_nodes" {
-  name = "eks-node-group-${var.cluster_name}"
+  name = "eks-node-group-${var.eks_cluster_name}"
 
   assume_role_policy = jsonencode({
     Statement = [{
@@ -81,7 +81,7 @@ resource "aws_eks_cluster" "eks_cluster" {
 
   depends_on = [aws_iam_role.eks-master, aws_iam_role.eks-nodes, aws_security_group.eks_sg]
 
-  name     = var.cluster_name
+  name     = var.eks_cluster_name
   role_arn = aws_iam_role.eks_cluster_role.arn
   version  = var.eks_version
 
@@ -96,7 +96,7 @@ resource "aws_eks_cluster" "eks_cluster" {
 
 resource "aws_eks_node_group" "eks_nodes" {
   cluster_name    = aws_eks_cluster.eks_cluster.name
-  node_group_name = "eks-node-group-${var.cluster_name}"
+  node_group_name = "eks-node-group-${var.eks_cluster_name}"
   node_role_arn   = aws_iam_role.eks_managed_nodes.arn
   subnet_ids      = var.eks_private_subnet_ids
 
@@ -123,5 +123,5 @@ resource "aws_eks_node_group" "eks_nodes" {
 }
 
 data "aws_eks_cluster_auth" "eks_cluster" {
-  name = var.cluster_name
+  name = var.eks_cluster_name
 }
