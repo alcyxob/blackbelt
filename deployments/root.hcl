@@ -34,6 +34,22 @@ locals {
 # environment variables
 inputs = local.merged_config
 
+generate "provider" {
+  path = "provider.tf"
+  if_exists = "overwrite_terragrunt"
+  contents = <<EOF
+provider "aws" {
+  region                  = "eu-central-1"
+  profile                 = "personal-alex"
+  default_tags {
+    tags = {
+      project = "BlackBelt"
+    }
+  }
+}
+EOF
+}
+
 terraform {
   source = "${local.root_deployments_dir}/../modules/stacks/${local.tier}/${local.stack}"
 }
