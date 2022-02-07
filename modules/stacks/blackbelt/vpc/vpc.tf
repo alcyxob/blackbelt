@@ -17,5 +17,4 @@ resource "aws_subnet" "public_subnet" {
     Name = "private_subnet_${count.index}"
     EKS = true
   }
-
 }
