@@ -11,8 +11,8 @@ variable "eks_version" {}
 variable "eks_min_capacity" {}
 variable "eks_max_capacity" {}
 variable "eks_private_subnet_ids" {}
-variable "eks_subnet_tag_name" {}
-variable "eks_subnet_tag_value" {}
+variable "eks_vpc_tag_kv" {}
+variable "eks_subnet_tag_kv" {}
 variable "eks_node_type" {}
 variable "eks_ec2_volume_size" {}
 variable "eks_node_ami" {}

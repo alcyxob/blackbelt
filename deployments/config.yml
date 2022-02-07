@@ -1,6 +1,9 @@
 region: "eu-central-1"
 vpc_cidr: "10.0.0.0/16"
 eks_cluster_name: "test-cluster"
+eks_vpc_tag_kv:
+  key: "EKS"
+  value: true
 eks_ec2_volume_size: "100G"
 eks_keypair_name: "eu-central-1-alex-key"
 eks_max_capacity: 1
